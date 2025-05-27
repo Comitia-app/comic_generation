@@ -9,31 +9,40 @@ export default function WaitlistPage() {
 
   const handleSubmit = async () => {
     if (!email || !story) {
-      alert("Please fill out all fields.");
-      return;
+      alert("Please fill out all fields.")
+      return
     }
+
+    const formData = new URLSearchParams()
+    formData.append("email", email)
+    formData.append("story", story)
 
     try {
       const response = await fetch(
-        'https://script.google.com/macros/s/AKfycbw-t8a5zKmyNrpqrDCbtBucPWsUtzZeHmOFSiVieJhx4SfzrAAtDrExgYmq9PKm1TlB/exec',
+        'https://script.google.com/macros/s/AKfycbxQvY754fURbj705n_ahRDDssmZo5oYm_Qfm3iufBvgAvL7Ejji85_EVuLC8d-hOI4e/exec',
         {
           method: 'POST',
-          mode: 'cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, story }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: formData.toString(),
         }
-      );
+      )
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP error! Status: ${response.status}`)
       }
 
-      const result = await response.json();
-      console.log(result);
-      setSubmitted(true);
+      const result = await response.json()
+      console.log(result)
+      if (result.result === 'success') {
+        setSubmitted(true)
+      } else {
+        alert('Submission failed. Please try again later.')
+      }
     } catch (error) {
-      console.error('Fetch error:', error);
-      alert('Submission failed. Please try again later.');
+      console.error('Fetch error:', error)
+      alert('Submission failed. Please try again later.')
     }
   }
 
@@ -71,4 +80,5 @@ export default function WaitlistPage() {
     </div>
   )
 }
+
 
