@@ -13,20 +13,19 @@ export default function WaitlistPage() {
       return
     }
 
+    // ✅ 핵심: mode: 'no-cors' + application/x-www-form-urlencoded
     try {
-      const response = await fetch('https://script.google.com/macros/s/AKfycbxOIv44YZRU2HpjOvAUcqxL8x4TFmAWMCxGX-zObbBCSPs-beTe0ojU1FwS3_9C0TEW/exec', {
+      await fetch('https://script.google.com/macros/s/AKfycbzwZ6bFWESuxYpWM-3jbffzcT3BvjyqWtCerXM7bvgNKZFl87XrSsn_3lMZstK71bDg/exec', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
         body: new URLSearchParams({ email, story }).toString(),
       })
 
-      const text = await response.text()
-
-      if (text.includes("success")) {
-        setSubmitted(true)
-      } else {
-        alert("Submission failed. Please try again later.")
-      }
+      // ✅ 응답을 받을 수 없기 때문에 성공 가정
+      setSubmitted(true)
     } catch (error) {
       console.error('Fetch error:', error)
       alert("Submission failed. Please try again later.")
