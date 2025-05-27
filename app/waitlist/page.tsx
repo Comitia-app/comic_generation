@@ -15,7 +15,7 @@ export default function WaitlistPage() {
 
     try {
       const response = await fetch(
-        'https://script.google.com/macros/s/AKfycbwwdd4Pu1z_VhBhUNphKoVy6s49ueNWOe2RizKqNWsm7FK-MRRZc77BsOJBfdnvfHpK/exec',
+        'https://script.google.com/macros/s/AKfycby3npoDZs7Z-dgV2WewY-NDCP1mnAFFXhiwAaHg2c19FJYWr1h_SFnlxWMWAu3_pFxw/exec',
         {
           method: 'POST',
           mode: 'cors',
