@@ -13,7 +13,7 @@ export default function WaitlistPage() {
       return
     }
 
-    await fetch('https://script.google.com/macros/s/AKfycbx94sMEtMxic6XnjYZWKi9Xt39P_C75qvqDxUt9Hg0ESud9Wh9Bav1fqIFRgd1sIQEo/exec', {
+    await fetch('https://script.google.com/macros/s/AKfycbz2pmgSsNj_bHI3HHXhcp0mqjOOtt0cmpAi31YIguvFRoiNRIWYNQ7JsJ4LZekd2jsn/exec', {
       method: 'POST',
       mode: 'cors',
       headers: { 'Content-Type': 'application/json' },
