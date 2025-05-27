@@ -13,12 +13,15 @@ export default function WaitlistPage() {
       return
     }
 
-    await fetch('https://script.google.com/macros/s/AKfycbz2pmgSsNj_bHI3HHXhcp0mqjOOtt0cmpAi31YIguvFRoiNRIWYNQ7JsJ4LZekd2jsn/exec', {
+    await fetch('https://script.google.com/macros/s/AKfycbwqMk_e6zqVgDjJj1ORk3vgGKzXzXRafGMr1uBPwkhH3OrMvGZtELJ847D2F5D1ygOK/exec', {
       method: 'POST',
       mode: 'cors',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({ email, story }),
     });
+
 
     setSubmitted(true)
   }
