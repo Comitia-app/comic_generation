@@ -13,7 +13,7 @@ export default function WaitlistPage() {
       return
     }
 
-    await fetch('/api/waitlist', {
+    await fetch('https://script.google.com/macros/s/AKfycbzhng8PtJ1WrIcdJIYV-j1-Co-CcqxwGyUDVk0Ta6bElxLhoMsSXHNZt4dJMh6fcbDJ/exec', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, story }),
