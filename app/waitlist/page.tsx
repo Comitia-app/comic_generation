@@ -13,32 +13,23 @@ export default function WaitlistPage() {
       return
     }
 
-    const formData = new URLSearchParams()
-    formData.append("email", email)
-    formData.append("story", story)
-
     try {
-      const response = await fetch(
-        'https://script.google.com/macros/s/AKfycbxOIv44YZRU2HpjOvAUcqxL8x4TFmAWMCxGX-zObbBCSPs-beTe0ojU1FwS3_9C0TEW/exec',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: formData.toString(),
-        }
-      )
+      const response = await fetch('https://script.google.com/macros/s/AKfycbxOIv44YZRU2HpjOvAUcqxL8x4TFmAWMCxGX-zObbBCSPs-beTe0ojU1FwS3_9C0TEW/exec', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ email, story }).toString(),
+      })
 
       const text = await response.text()
 
-      if (text.includes('success')) {
+      if (text.includes("success")) {
         setSubmitted(true)
       } else {
-        alert('Submission failed. Please try again later.')
+        alert("Submission failed. Please try again later.")
       }
     } catch (error) {
       console.error('Fetch error:', error)
-      alert('Submission failed. Please try again later.')
+      alert("Submission failed. Please try again later.")
     }
   }
 
@@ -76,6 +67,7 @@ export default function WaitlistPage() {
     </div>
   )
 }
+
 
 
 
