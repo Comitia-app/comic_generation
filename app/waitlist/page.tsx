@@ -13,7 +13,7 @@ export default function WaitlistPage() {
       return
     }
 
-    await fetch('https://script.google.com/macros/s/AKfycbwqMk_e6zqVgDjJj1ORk3vgGKzXzXRafGMr1uBPwkhH3OrMvGZtELJ847D2F5D1ygOK/exec', {
+    await fetch('https://script.google.com/macros/s/AKfycbxVMPKaN2WzYW2uvOd4gk50ZFwJZ1BDgFs5OuLISNtVtoo2kNNK2DTE2Rph495qghKp/exec', {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -21,7 +21,6 @@ export default function WaitlistPage() {
       },
       body: JSON.stringify({ email, story }),
     });
-
 
     setSubmitted(true)
   }
