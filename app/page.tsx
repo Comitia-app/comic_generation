@@ -54,7 +54,7 @@ const comics = [
     id: 2,
     title: "Neon Dreams",
     description: "Cyberpunk adventures in a dystopian future",
-    creator: "digital_dreamer",c
+    creator: "digital_dreamer",
     updated_at: "2025-04-10",
     view_count: 9876,
     like_count: 2198,
