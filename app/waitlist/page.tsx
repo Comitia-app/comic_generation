@@ -13,13 +13,12 @@ export default function WaitlistPage() {
       return
     }
 
-    await fetch('https://script.google.com/macros/s/AKfycbzhng8PtJ1WrIcdJIYV-j1-Co-CcqxwGyUDVk0Ta6bElxLhoMsSXHNZt4dJMh6fcbDJ/exec', {
+    await fetch('https://script.google.com/macros/s/AKfycbzk2w8s1euc3IpUJE0-TnnO74ehhuRFSWJiU1a7UHC0GlYSLehS7k5d839ARJuwezzv/exec', {
       method: 'POST',
-      mode: 'cors', // ← 이 부분이 추가됨
+      mode: 'cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, story }),
-    })
-
+    });
 
     setSubmitted(true)
   }
