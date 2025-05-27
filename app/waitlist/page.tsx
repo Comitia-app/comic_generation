@@ -9,20 +9,32 @@ export default function WaitlistPage() {
 
   const handleSubmit = async () => {
     if (!email || !story) {
-      alert("Please fill out all fields.")
-      return
+      alert("Please fill out all fields.");
+      return;
     }
 
-    await fetch('https://script.google.com/macros/s/AKfycbxVMPKaN2WzYW2uvOd4gk50ZFwJZ1BDgFs5OuLISNtVtoo2kNNK2DTE2Rph495qghKp/exec', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, story }),
-    });
+    try {
+      const response = await fetch(
+        'https://script.google.com/macros/s/AKfycbwwdd4Pu1z_VhBhUNphKoVy6s49ueNWOe2RizKqNWsm7FK-MRRZc77BsOJBfdnvfHpK/exec',
+        {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, story }),
+        }
+      );
 
-    setSubmitted(true)
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log(result);
+      setSubmitted(true);
+    } catch (error) {
+      console.error('Fetch error:', error);
+      alert('Submission failed. Please try again later.');
+    }
   }
 
   return (
@@ -59,3 +71,4 @@ export default function WaitlistPage() {
     </div>
   )
 }
+
