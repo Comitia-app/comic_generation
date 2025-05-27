@@ -19,7 +19,7 @@ export default function WaitlistPage() {
 
     try {
       const response = await fetch(
-        'https://script.google.com/macros/s/AKfycbxQvY754fURbj705n_ahRDDssmZo5oYm_Qfm3iufBvgAvL7Ejji85_EVuLC8d-hOI4e/exec',
+        'https://script.google.com/macros/s/AKfycbxOIv44YZRU2HpjOvAUcqxL8x4TFmAWMCxGX-zObbBCSPs-beTe0ojU1FwS3_9C0TEW/exec',
         {
           method: 'POST',
           headers: {
@@ -29,13 +29,9 @@ export default function WaitlistPage() {
         }
       )
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`)
-      }
+      const text = await response.text()
 
-      const result = await response.json()
-      console.log(result)
-      if (result.result === 'success') {
+      if (text.includes('success')) {
         setSubmitted(true)
       } else {
         alert('Submission failed. Please try again later.')
@@ -80,5 +76,6 @@ export default function WaitlistPage() {
     </div>
   )
 }
+
 
 
