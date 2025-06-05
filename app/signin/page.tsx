@@ -70,7 +70,8 @@ export default function SigninPage() {
         }
       }
 
-      // Redirect to home page after successful login
+
+      window.dispatchEvent(new Event('focus'));
       router.push("/");
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred during login");
