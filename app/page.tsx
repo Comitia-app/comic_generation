@@ -3,6 +3,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Heart } from "lucide-react"
+import { cookies } from 'next/headers'
 
 // Mock data for the landing page
 const characters = [
@@ -74,21 +75,44 @@ const comics = [
   },
 ]
 
-export default function Home() {
+export default async function Home() {
+  // Get the access token from cookies
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('accessToken')?.value;
+
+  // Fetch user data if access token exists
+  let userData = null;
+  if (accessToken) {
+    try {
+      const res = await fetch('https://comitia-api.onrender.com/api/user/me', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        // Ensure fresh data on each request
+        cache: 'no-store',
+      });
+
+      if (res.ok) {
+        userData = await res.json();
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  }
+
   return (
     <div className="space-y-16">
       {/* Section 1: Introduction */}
       <section className="introduction relative overflow-hidden rounded-xl bg-gradient-to-r from-purple-700 to-indigo-800 text-white p-8 md:p-12">
         <div className="max-w-3xl relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Someone made a joke on AI</h1>
-
-         
+          {userData && (
+            <div className="mt-4 p-3 bg-white/10 rounded-lg">
+              <p className="text-lg">Welcome back, {userData.name || userData.email || 'User'}!</p>
+            </div>
+          )}
         </div>
-      
       </section>
-
-      
-
     </div>
   )
 }
