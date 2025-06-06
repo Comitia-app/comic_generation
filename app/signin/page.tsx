@@ -21,7 +21,42 @@ export default function SigninPage() {
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
   };
+  const handleVerifyEmail = async () => {
+    try {
+      setLoading(true);
+      setError("");
 
+      // email check
+      if (!formData.email) {
+        setError("Please enter your email address.");
+        setLoading(false);
+        return;
+      }
+
+      // test token
+      const token = `${formData.email}-test-email-token`;
+      const url = `https://comitia-api.onrender.com/api/users/verify?token=${encodeURIComponent(token)}`;
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Verification failed");
+      }
+
+      const data = await response.json();
+      alert("Verification status: " + (data?.message));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "error occurred during verification. please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
   const handleSubmit = async () => {
     try {
       // Validate form
@@ -116,6 +151,14 @@ export default function SigninPage() {
           </div>
         </CardContent>
         <CardFooter className="flex flex-col space-y-2">
+          <Button 
+            className="w-full mb-2" 
+            onClick={handleVerifyEmail} 
+            disabled={loading}
+            variant="outline"
+          >
+            verify email(TEST)
+          </Button>
           <Button 
             className="w-full" 
             onClick={handleSubmit} 
