@@ -7,7 +7,7 @@ RUN npm install -g pnpm
 # Set working directory
 WORKDIR /app
 
-# Install dependencies only when needed ycpark
+# Install dependencies only when needed
 FROM base AS deps
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
